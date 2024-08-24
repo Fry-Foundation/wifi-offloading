@@ -2,10 +2,12 @@ import toml
 import json
 from dotenv import load_dotenv
 import os
+import shutil
 
 TMP_PATH = 'tmp'
 DIFFCONFIG_FILE = 'diffconfig'
 DEVICE_JSON_FILE = 'device.json'
+BANNER_FILE = 'banner'
 
 def generate_build_config(base_config, firmware_config):
     os_name = base_config["general"]["os_name"]
@@ -54,6 +56,28 @@ def generate_device_json(codename: str, brand: str, model: str) -> None:
     with open(device_json_path, 'w') as device_json_file:
         json.dump(data, device_json_file, indent=2)
 
+def generate_banner(codename: str, version: str) -> None:
+    banner = r'''
+ _       __                       ____  _____
+| |     / /___ ___  _________  __/ __ \/ ___/
+| | /| / / __ `/ / / / ___/ / / / / / /\__ \
+| |/ |/ / /_/ / /_/ / /  / /_/ / /_/ /___/ /
+|__/|__/\__,_/\__, /_/   \__,_/\____//____/
+        /____/
+---------------------------------------------
+variant codename: {codename}
+version: {version}
+---------------------------------------------'''
+
+    # Remove the leading newline character
+    banner = banner[1:] if banner.startswith('\n') else banner
+
+    banner = banner.format(codename=codename, version=version)
+
+    banner_path = os.path.join(TMP_PATH, BANNER_FILE)
+    with open(banner_path, 'w') as banner_file:
+        banner_file.write(banner)
+
 def main():
     # Load env
     load_dotenv()
@@ -79,7 +103,24 @@ def main():
     model = profile_config["general"]["model"]
     generate_device_json(codename, brand, model)
 
-    # @todo Copy uci-defaults
+    # Generate banner
+    generate_banner(codename, base_config["general"]["os_version"])
+
+    # @todo Fetch shadow file from secrets vault
+
+    # Create needed directories to ship files with the build
+    os.makedirs('openwrt/files/etc/uci-defaults', exist_ok=True)
+    os.makedirs(f'openwrt/files/etc/{base_config['general']['os_name']}', exist_ok=True)
+
+    # Copy uci-defaults
+    shutil.copytree(f'profiles/{selected_profile}/uci-defaults', 'openwrt/files/etc/uci-defaults', dirs_exist_ok=True)
+
+    # Copy device.json
+    shutil.copy2(os.path.join(TMP_PATH, DEVICE_JSON_FILE), f'openwrt/files/etc/{base_config["general"]["os_name"]}/device.json')
+
+    # Copy banner
+    shutil.copy2(os.path.join(TMP_PATH, BANNER_FILE), f'openwrt/files/etc/banner')
+
 
 if __name__ == '__main__':
     main()
