@@ -63,9 +63,9 @@ Check the `Makefile` and the `tools` folder for a better understanding of the to
 
 To set up and build a wayru-os image, you can follow these steps:
 - Clone the OpenWrt repository `make clone-openwrt`
+- Update and install feeds `make update-feeds`
 - Configure build system with wayru-os profiles `make configure`
   - Make sure to have specified the profile in the `.env` file
-- Update and install feeds `make update-feeds`
 - Complete the configuration with the OpenWrt build system `make defconfig`
 - Build the firmware `make build`
 - Upload builds `make upload`

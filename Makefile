@@ -6,15 +6,15 @@ TOOLS_DIR := tools
 clone-openwrt:
 	$(TOOLS_DIR)/clone-openwrt.sh
 
-configure:
-	python $(TOOLS_DIR)/configure.py
-
 update-feeds:
 	cd $(OPENWRT_DIR) && ./scripts/feeds update -a
 	cd $(OPENWRT_DIR) && ./scripts/feeds install -a
 
 uninstall-feeds:
 	cd $(OPENWRT_DIR) && ./scripts/feeds uninstall -a
+
+configure:
+	python $(TOOLS_DIR)/configure.py
 
 defconfig:
 	cd $(OPENWRT_DIR) && $(MAKE) defconfig
