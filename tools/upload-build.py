@@ -2,14 +2,18 @@ import os
 import shutil
 import json
 import tarfile
+import toml
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from dotenv import load_dotenv
 
-BUILD_DIR = '../wayru-os' 
+load_dotenv()
+
+BUILD_DIR = 'openwrt' 
 IMAGE_NAME_TEMPLATE = 'wayru-os-{}-{}.tar.gz'
 
 # Azure configuration
-AZURE_CONNECTION_STRING = 'DefaultEndpointsProtocol=https;AccountName=firmwarebuilds;AccountKey=OFTa9OuDBRo1odhgVTPk1YXwPAfi8qNezM35XpyJH7lZFEmLbI7U2Etk+yDrAsXq/GO0I7mEUb6N+AStfMR64A==;EndpointSuffix=core.windows.net'
-CONTAINER_NAME = 'wayru-os-builds'
+AZURE_CONNECTION_STRING = os.getenv('AZURE_CONNECTION_STRING')
+CONTAINER_NAME = os.getenv('CONTAINER_NAME')
 
 def find_output_dir(base_dir):
     for root, dirs, files in os.walk(base_dir):
@@ -42,11 +46,17 @@ def get_codename_and_version():
         codename = device_info['name']
 
     # Get version from VERSION
-    version_file_path = os.path.join(BUILD_DIR, 'VERSION')
+    """version_file_path = os.path.join(BUILD_DIR, 'VERSION')
     with open(version_file_path) as version_file:
-        version = version_file.read().strip()
+        version = version_file.read().strip()"""
+    
+    # Get version from base-config.toml
+    base_config_path = 'base-config.toml' 
+    base_config = toml.load(base_config_path)
+    version = base_config['general']['os_version']
 
     return codename, version
+
 
 def package_files(output_dir, sysupgrade_hash, sysupgrade_file, codename, version):
 
@@ -70,11 +80,27 @@ def package_files(output_dir, sysupgrade_hash, sysupgrade_file, codename, versio
 
     return image_path
 
+def check_blob_exists(blob_service_client, container_name, blob_prefix):
+   
+    container_client = blob_service_client.get_container_client(container_name)
+    blobs = container_client.list_blobs(name_starts_with=blob_prefix)
+    
+    return any(True for _ in blobs)
+
 def upload_to_azure(file_path, connection_string, container_name, codename, version):
     blob_service_client = BlobServiceClient.from_connection_string(connection_string)
     blob_folder_path = f'targets/{codename}/{version}/{os.path.basename(file_path)}'
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_folder_path)
 
+    if check_blob_exists(blob_service_client, container_name, blob_folder_path):
+        print(f"There is already a folder with the version '{version}' in '{codename}'.")
+        respuesta = input("Do you want to replace it? (yes/no): ").strip().lower()
+        if respuesta != 'yes':
+            print("Operation cancelled.")
+            return
+
+    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_folder_path)
+    print(f"Uploading {file_path} to Azure Blob Storage")
+    
     with open(file_path, "rb") as data:
         blob_client.upload_blob(data, overwrite=True)
     print(f"Uploaded {file_path} to Azure Blob Storage at {blob_folder_path}")
@@ -82,12 +108,12 @@ def upload_to_azure(file_path, connection_string, container_name, codename, vers
 def main():
     output_dir = find_output_dir(BUILD_DIR)
     if not output_dir:
-        print("No se encontró el directorio de salida con los archivos requeridos.")
+        print("Output directory with required files not found.")
         return
 
     sysupgrade_hash, sysupgrade_file = get_sysupgrade_hash_and_file(output_dir)
     if not sysupgrade_hash or not sysupgrade_file:
-        print("No se encontraron archivos sysupgrade en el directorio de salida.")
+        print("No sysupgrade files found in output directory")
         return
 
     codename, version = get_codename_and_version()

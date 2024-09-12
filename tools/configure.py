@@ -104,6 +104,8 @@ def main():
 
     # @todo Fetch shadow file from secrets vault
 
+    os_name = base_config['general']['os_name'] 
+    
     # Create needed directories to ship files with the build
     os_name = base_config['general']['os_name']
     os.makedirs('openwrt/files/etc/uci-defaults', exist_ok=True)
