@@ -1,0 +1,33 @@
+[general]
+codename = "Artemisa"
+brand = "Unifi"
+model = "AP AC Lite"
+
+[build]
+target = "ath79"
+subtarget = "generic"
+device_profile = "ubnt_unifiac-lite"
+
+[packages]
+base = [
+    "curl",
+    "libcurl",
+    "ca-certificates",
+    "lua",
+    "lua-cjson",
+    "luafilesystem",
+    "liblua",
+    "libuci-lua",
+    "libubus-lua",
+    # Enterprise networks
+    "wpad",
+    # OpenWISP
+    "openwisp-config",
+    "openwisp-monitoring",
+    "netjson-monitoring",
+    "openvpn-openssl",
+    # Wayru services
+    "wayru-os-api",
+    "wayru-os-services",
+]
+

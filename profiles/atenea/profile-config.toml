@@ -1,0 +1,33 @@
+[general]
+codename = "Atenea"
+brand = "Unifi"
+model = "AP AC LR"
+
+[build]
+target = "ath79"
+subtarget = "generic"
+device_profile = "ubnt_unifiac-lr"
+
+[packages]
+base = [
+    "curl",
+    "libcurl",
+    "ca-certificates",
+    "lua",
+    "lua-cjson",
+    "luafilesystem",
+    "liblua",
+    "libuci-lua",
+    "libubus-lua",
+    # Enterprise networks
+    "wpad",
+    # OpenWISP
+    "openwisp-config",
+    "openwisp-monitoring",
+    "netjson-monitoring",
+    "openvpn-openssl",
+    # Wayru services
+    "wayru-os-api",
+    "wayru-os-services",
+]
+

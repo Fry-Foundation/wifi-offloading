@@ -1,0 +1,32 @@
+[general]
+codename = "Chronos"
+brand = "TP-Link"
+model = "EAP613"
+
+[build]
+target = "ramips"
+subtarget = "mt7621"
+device_profile = "tplink_eap613-v1"
+
+[packages]
+base = [
+    "curl",
+    "libcurl",
+    "ca-certificates",
+    "lua",
+    "lua-cjson",
+    "luafilesystem",
+    "liblua",
+    "libuci-lua",
+    "libubus-lua",
+    # Enterprise networks
+    "wpad",
+    # OpenWISP
+    "openwisp-config",
+    "openwisp-monitoring",
+    "netjson-monitoring",
+    "openvpn-openssl",
+    # Wayru services
+    "wayru-os-api",
+    "wayru-os-services",
+]
