@@ -1,12 +1,12 @@
 [general]
-codename = "Voyage installer"
+codename = "Prometheus installer"
 brand = "Wayru"
-model = "Voyage installer"
+model = "Prometheus installer"
 
 [build]
-target = "x86"
-subtarget = "64"
-device_profile = "generic"
+target = "mediatek"
+subtarget = "filogic"
+device_profile = "comfast_cf-wa933"
 
 [packages]
 base = [
@@ -26,7 +26,4 @@ base = [
     "openvpn-openssl",
     # Wayru services
     "wayru-os-api",
-    #Wireless Drivers
-    "kmod-mt7921e",
-    "kmod-mt7921e-firmware",
 ]
