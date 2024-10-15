@@ -109,10 +109,15 @@ def main():
     # Create needed directories to ship files with the build
     os_name = base_config['general']['os_name']
     os.makedirs('openwrt/files/etc/uci-defaults', exist_ok=True)
+    os.makedirs('openwrt/files/etc/config', exist_ok=True)
     os.makedirs(f'openwrt/files/etc/{os_name}', exist_ok=True)
 
     # Copy uci-defaults
     shutil.copytree(f'profiles/{selected_profile}/uci-defaults', 'openwrt/files/etc/uci-defaults', dirs_exist_ok=True)
+
+    # Copy config (if exists)
+    if os.path.exists(f'profiles/{selected_profile}/config'):
+        shutil.copytree(f'profiles/{selected_profile}/config', 'openwrt/files/etc/config', dirs_exist_ok=True)
 
     # Copy device.json
     shutil.copy2(os.path.join(TMP_PATH, DEVICE_JSON_FILE), f'openwrt/files/etc/{os_name}/device.json')
