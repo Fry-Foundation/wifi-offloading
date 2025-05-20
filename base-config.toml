@@ -1,10 +1,10 @@
 [general]
 os_name = "wayru-os"
-os_version = "23.3.1"
+os_version = "23.3.2"
 
 [openwrt]
 repo = "https://git.openwrt.org/openwrt/openwrt.git"
-tag = "v23.05.4"
+tag = "v23.05.5"
 
 [[openwrt.feeds]]
 method = "src-git"
