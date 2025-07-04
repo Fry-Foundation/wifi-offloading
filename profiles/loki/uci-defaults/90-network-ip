@@ -5,7 +5,6 @@ uci -q batch << EOI
 add network bridge-vlan
 set network.@bridge-vlan[-1].device='br-lan'
 set network.@bridge-vlan[-1].vlan='10'
-add_list network.@bridge-vlan[-1].ports='sw-eth1'
 
 add network bridge-vlan
 set network.@bridge-vlan[-1].device='br-lan'
@@ -34,6 +33,13 @@ set network.ports.proto='static'
 set network.ports.ipaddr='192.168.65.1'
 set network.ports.netmask='255.255.255.0'
 set network.ports.device='br-lan.30'
+
+set network.wan=interface
+set network.wan.proto='dhcp'
+set network.wan.device='sw-eth1'
+
+# Make sure the WAN interface is not part of any bridge
+del_list network.@device[0].ports='sw-eth1'
 
 del network.lan
 
