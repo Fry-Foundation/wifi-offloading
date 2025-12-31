@@ -1,6 +1,6 @@
 [general]
 codename = "Odyssey"
-brand = "Wayru"
+brand = "Fry"
 model = "Odyssey"
 
 [build]
@@ -36,7 +36,7 @@ base = [
     #"dnsmasq_full_dhcp",
     #"dnsmasq_full_ipset",
     #"ipset",
-    # Wayru services
-    "wayru-os-api",
-    "wayru-os-services",
+    # Fry services
+    "fry-os-api",
+    "fry-os-services",
 ]

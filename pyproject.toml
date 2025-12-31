@@ -1,7 +1,7 @@
 [project]
-name = "wayru-os"
+name = "fry-os"
 version = "0.1.0"
-description = "wayru-os build system and configuration"
+description = "fry-os build system and configuration for WiFi offloading"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

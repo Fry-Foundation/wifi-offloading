@@ -1,15 +1,15 @@
-# wayru-os
+# fry-os
 ```
- _       __                       ____  _____
-| |     / /___ ___  _________  __/ __ \/ ___/
-| | /| / / __ `/ / / / ___/ / / / / / /\__ \
-| |/ |/ / /_/ / /_/ / /  / /_/ / /_/ /___/ /
-|__/|__/\__,_/\__, /_/   \__,_/\____//____/
-             /____/
+   ______           ____  _____
+  / ____/______  __/ __ \/ ___/
+ / /_  / ___/ / / / / / /\__ \
+/ __/ / /  / /_/ / /_/ /___/ /
+/_/   /_/   \__, /\____//____/
+           /____/
 ```
-WayruOS is a Linux distribution based on OpenWrt. It is designed to be used in routers and other embedded devices. It runs Wayru's operator services and applications.
+FryOS is a Linux distribution based on OpenWrt designed for WiFi offloading in DePIN (Decentralized Physical Infrastructure Networks). It enables routers and embedded devices to participate in Fry Networks' decentralized connectivity infrastructure, supporting partnerships with LTE providers like T-Mobile for WiFi offloading services.
 
-This repository contains the configuration files to build WayruOS with the OpenWrt build system. It also contains device profiles that include configuration and dependencies specific to each device.
+This repository contains the configuration files to build FryOS with the OpenWrt build system. It also contains device profiles that include configuration and dependencies specific to each device.
 
 ## Features
 
@@ -17,9 +17,15 @@ This repository contains the configuration files to build WayruOS with the OpenW
 - Captive portal
 - OpenWISP integration
 - OpenVPN integration
-- Wayru onboarding
-- Wayru monitoring
-- Wayru firmware upgrades
+- Fry Networks onboarding
+- Fry Networks monitoring
+- Fry Networks firmware upgrades
+- WiFi offloading for DePIN networks
+- LTE provider partnership support
+
+## Related Repositories
+
+- [wifi-offloading-services](https://github.com/Fry-Foundation/wifi-offloading-services) - Backend services for WiFi offloading
 
 ## Supported devices
 
@@ -27,13 +33,13 @@ Check the profiles directory for the supported devices.
 
 ## Configuration
 
-This repository contains configuration files to build WayruOS.
+This repository contains configuration files to build FryOS.
 - Base firmware configuration: `base-config.toml`
 - Per-device configuration: `profiles/<device-codename>/profile-config.toml`
 
 ## Versioning
 
-WayruOS uses [Semantic Versioning](https://semver.org/).
+FryOS uses [Semantic Versioning](https://semver.org/).
 
 The firmware version is composed of 4 parts:
 - Device codename
@@ -41,9 +47,9 @@ The firmware version is composed of 4 parts:
 - Minor version: incremented for each release with new features
 - Patch version: incremented for each build that includes bug fixes or small improvements
 
-Format: `wayru-os-{device-codename}-{major}.{minor}.{patch}`
+Format: `fry-os-{device-codename}-{major}.{minor}.{patch}`
 
-Example: `wayru-os-genesis-23.1.0`
+Example: `fry-os-genesis-23.1.0`
 
 ## Repo setup
 Make sure to install:
@@ -58,14 +64,14 @@ Make sure to install:
 3. Set up the Python environment: `just setup`
 
 ## Repo tools
-The repo has tools to configure, build, and publish wayru-os images.
+The repo has tools to configure, build, and publish fry-os images.
 
 Check the `justfile` and the `tools` folder for a better understanding of the tools available.
 
 You can also run `just` to show all available recipes.
 
 ### Quick start:
-To set up and build a wayru-os image, you can follow these steps:
+To set up and build a fry-os image, you can follow these steps:
 1. Set up the environment: `just setup`
 2. Configure your profile in the `.env` file (copy from `.env.example`)
 3. Run the complete build: `just full-build`
@@ -78,7 +84,7 @@ For iterative development after initial setup:
 
 ## Contributing
 
-This project is now open source. Contributions are welcome! Please follow these guidelines:
+Contributions are welcome! Please follow these guidelines:
 
 1. Fork the repository
 2. Create a feature branch
@@ -91,15 +97,6 @@ This project is licensed under the MIT License.
 
 ## Support
 
-**Important**: This project is now open source and maintained by the community. WAYRU no longer exists and will not provide support for this repository. For issues, questions, or contributions, please use the GitHub Issues section.
+For issues, questions, or contributions, please use the GitHub Issues section.
 
-💙 **Farewell Message**
-
-With gratitude and love, we say goodbye.
-WAYRU is closing its doors, but we are leaving these repositories open and free for the community.
-May they continue to inspire builders, dreamers, and innovators.
-
-With love, WAYRU
----
-
-**Note**: This project is **open source**. Wayru, Inc and The Wayru Foundation are no longer operating entities, and will not provide any kind of support. The community is welcome to use, modify, and improve this codebase.
+**Note**: This project is maintained by [Fry Foundation](https://github.com/Fry-Foundation) as part of the Fry Networks DePIN ecosystem.
