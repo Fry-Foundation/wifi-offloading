@@ -1,4 +1,4 @@
-## WayruOS VM Setup
+## FryOS VM Setup
 
 ### Prerequisites
 
@@ -6,26 +6,26 @@
 
 ### Steps
 
-Download a stable release of the wayru-os-23.1.0-alpha-x86-generic-generic-ext4-combined.img
+Download a stable release of the fry-os-23.1.0-alpha-x86-generic-generic-ext4-combined.img
 
 #### Convert downloaded img to VBox drive
 - Open a terminal and go in the folder where you have downloaded the file (On windows make sure you are located on /Oracle/VirtualBox/)
 - Convert it to native VBox format by writing this in command line:
 
-        VBoxManage convertfromraw --format VDI wayru-os-*.img VDI-NAME.vdi.
+        VBoxManage convertfromraw --format VDI fry-os-*.img VDI-NAME.vdi.
 
 This will create the .vdi file which will be a virtual drive for VBox virtual machine.
 
 #### Creating the VM
 Execute the following commands
- 
-	VBoxManage createvm --name "WayruOS" --ostype "Linux26" --register
-	VBoxManage modifyvm "WayruOS" --memory 512 --cpus 1 --nic1 nat --nic2 bridged
-	VBoxManage storagectl "WayruOS" --name "SATA Controller" --add sata --controller IntelAhci
-	VBoxManage storageattach "WayruOS" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium /route/to/disk/VDI-NAME.vdi
+
+	VBoxManage createvm --name "FryOS" --ostype "Linux26" --register
+	VBoxManage modifyvm "FryOS" --memory 512 --cpus 1 --nic1 nat --nic2 bridged
+	VBoxManage storagectl "FryOS" --name "SATA Controller" --add sata --controller IntelAhci
+	VBoxManage storageattach "FryOS" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium /route/to/disk/VDI-NAME.vdi
 
 #### Start the VM
-	VBoxManage startvm "WayruOS"
+	VBoxManage startvm "FryOS"
 
 - Wait 4s for Grub to initialize openWRT.
 - Press ENTER once the text stops scrolling.

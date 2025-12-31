@@ -1,6 +1,6 @@
 [general]
 codename = "Prometheus-installer"
-brand = "Wayru"
+brand = "Fry"
 model = "Prometheus"
 
 [build]
@@ -24,7 +24,7 @@ base = [
     "openwisp-monitoring",
     "netjson-monitoring",
     "openvpn-openssl",
-    # Wayru services
-    "wayru-os-api",
-    "wayru-os-services",
+    # Fry services
+    "fry-os-api",
+    "fry-os-services",
 ]

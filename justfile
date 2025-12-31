@@ -1,4 +1,4 @@
-# WayruOS build system using just
+# FryOS build system using just
 # https://github.com/casey/just
 
 set shell := ["bash", "-c"]
@@ -41,7 +41,7 @@ add-patches-force:
 configure-feeds:
     uv run python {{tools_dir}}/configure-feeds.py
 
-# Configure build system with wayru-os profiles
+# Configure build system with fry-os profiles
 configure:
     uv run python {{tools_dir}}/configure.py
 
@@ -92,7 +92,7 @@ lint:
 
 # Show build information
 info:
-    @echo "WayruOS Build System"
+    @echo "FryOS Build System"
     @echo "==================="
     @echo "OpenWrt directory: {{openwrt_dir}}"
     @echo "Tools directory: {{tools_dir}}"

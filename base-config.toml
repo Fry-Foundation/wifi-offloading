@@ -1,5 +1,5 @@
 [general]
-os_name = "wayru-os"
+os_name = "fry-os"
 os_version = "23.3.2"
 
 [openwrt]
@@ -8,8 +8,8 @@ tag = "v23.05.5"
 
 [[openwrt.feeds]]
 method = "src-git"
-name = "wayru_os_feed"
-url = "https://github.com/Wayru-Network/wayru-os-feed.git"
+name = "fry_os_feed"
+url = "https://github.com/Fry-Foundation/fry-os-feed.git"
 
 [[openwrt.feeds]]
 method = "src-git"

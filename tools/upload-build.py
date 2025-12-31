@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BUILD_DIR = 'openwrt' 
-IMAGE_NAME_TEMPLATE = 'wayru-os-{}-{}.tar.gz'
+IMAGE_NAME_TEMPLATE = 'fry-os-{}-{}.tar.gz'
 
 # Azure configuration
 AZURE_CONNECTION_STRING = os.getenv('AZURE_CONNECTION_STRING')
@@ -40,7 +40,7 @@ def get_sysupgrade_hash_and_file(output_dir):
 
 def get_codename_and_version():
     # Get codename from device.json
-    device_json_path = os.path.join(BUILD_DIR, 'files', 'etc', 'wayru-os', 'device.json')
+    device_json_path = os.path.join(BUILD_DIR, 'files', 'etc', 'fry-os', 'device.json')
     with open(device_json_path) as json_file:
         device_info = json.load(json_file)
         codename = device_info['name']

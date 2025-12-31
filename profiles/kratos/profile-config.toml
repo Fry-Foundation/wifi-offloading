@@ -27,8 +27,8 @@ base = [
     "openwisp-monitoring",
     "netjson-monitoring",
     "openvpn-openssl",
-    # Wayru services
-    "wayru-os-api",
-    "wayru-os-services",
+    # Fry services
+    "fry-os-api",
+    "fry-os-services",
 ]
 

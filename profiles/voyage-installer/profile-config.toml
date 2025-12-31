@@ -1,6 +1,6 @@
 [general]
 codename = "Voyage installer"
-brand = "Wayru"
+brand = "Fry"
 model = "Voyage installer"
 
 [build]
@@ -24,8 +24,8 @@ base = [
     "openwisp-monitoring",
     "netjson-monitoring",
     "openvpn-openssl",
-    # Wayru services
-    "wayru-os-api",
+    # Fry services
+    "fry-os-api",
     #Wireless Drivers
     "kmod-mt7921e",
     "kmod-mt7921e-firmware",
